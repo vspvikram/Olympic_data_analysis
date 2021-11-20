@@ -1,9 +1,9 @@
 This is a template for the EDAV final project. It is based on the template created with *File, New Project..., New Directory, Book Project using bookdown* in RStudio. 
 
 Contributors-
-Vikram Singh
-Parth Gupta
-Aniket Shahne
+Vikram Singh (vs2781)
+Parth Gupta (pg2677)
+Aniket Shahne (aas2374)
 
 ## ABSOLUTE ESSENTIALS
 
