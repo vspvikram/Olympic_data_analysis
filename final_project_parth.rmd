@@ -9,9 +9,7 @@ output: html_document
 # Load packages
 library("plotly")
 library("tidyverse")
-#library("tidentityentityyverse")
 library("data.table")
-#library("gridentityentityExtra")
 library("knitr")
 library(grid)
 library(gridExtra)
