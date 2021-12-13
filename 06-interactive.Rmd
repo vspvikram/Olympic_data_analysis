@@ -1,5 +1,260 @@
 # Interactive component
 
+<script src="https://d3js.org/d3.v6.js"></script>
+<select id="selectButton"></select>
+<div id="my_dataviz"></div>
 
+<script>
+var margin = {top: 30, right: 30, bottom: 30, left: 60},
+    width = 700 - margin.left - margin.right,
+    height = 700 - (margin.top + margin.bottom);
+
+
+// append the svg object to the body of the page
+const svg = d3.select("#my_dataviz")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+// Parse the Data
+d3.csv("https://raw.githubusercontent.com/vspvikram/Olympic_data_analysis/main/women_prop.csv").then( function(data) {
+
+  // list of all the years
+  const allGroup = ["1912 - Before WW1", "1920 - After WW1", "1936 - Before WW2", "1948 - After WW2", 1976, 2016]
+
+  // add the year options to the buttons
+  d3.select("#selectButton")
+    .selectAll("myOptions")
+      .data(allGroup)
+    .enter()
+      .append("option")
+    .text(function (d) {return d; }) // text showed in the menu
+    .attr("value", function (d) { return d; }) // corresponding value returned by the button
+
+  var background = svg.append("rect")
+    
+
+  const init_dataFilter = data.filter(function(d){ return d.Year == 1936})
+
+  // Add X axis
+  var x = d3.scaleLinear()
+  var xAxis = svg.append("g")
+
+  // Y axis initializing 
+  var y = d3.scaleBand()
+  var yAxis = svg.append('g')
+      
+  // Adding xlabel, ylabel and title of plot
+  var xlabel = svg.append("text")
+  var ylabel = svg.append("text")
+  var title = svg.append("text")
+
+  // Adding legends
+  var legend1 = svg.append("circle")
+  var legend1_text = svg.append("text")
+  var legend2 = svg.append("circle")
+  var legend2_text = svg.append("text")
+
+  //adding vertical line to indicate 50%
+  var vert_line = svg.append("line")
+  var vert_line_txt = svg.append("text")
+
+
+  // Initializing the plot with year 1936
+  update(1912)
+
+  function update(selectedGroup) {
+
+    const dataFilter = data.filter(function(d){ return d.Year == selectedGroup})
+    // console.log(dataFilter);
+    height = [...new Set (dataFilter.map(d => d.NOC))].length * 10
+    // height = d3.count(height_, d => d.NOC)
+    console.log(height)
+
+    background
+      .attr("width", width-100)
+      .attr("height", height)
+      .attr("fill", "#EBECF0");
+    // adding y gridlines
+    // var d3.axisLeft(y)
+    //   .ticks(5)
+
+
+
+    // Updating the y axis
+    y
+      .domain(dataFilter.map(d => d.NOC))
+      .range([0, height])
+      .padding(1.4)
+    yAxis.call(d3.axisLeft(y))
+      .call(d3.axisLeft(y))
+      .call(d3.axisRight(y)
+        .tickSize(width-100))
+      .call(g => g.selectAll(".tick:not(:first-of-type) line")
+        .attr("stroke", 'white')
+        .attr("stoke-opacity", 0.5))
+        // .attr("stroke-dasharray", "5,2"))
+      .call(g => g.selectAll(".tick text")
+        .attr("x", -2)
+        .attr("dy", 4))
+
+    // Updating the x-axis
+    x
+      .domain([-0.1, 1.1])
+      .range([ 0, width-100]);
+    xAxis
+      .attr("transform", `translate(0, ${height})`)
+      .call(d3.axisBottom(x)
+        .tickSize(-height)
+        .ticks(5))
+      // .call(d3.axisTop(x)
+      //   .tickSize(height))
+      .call(g => g.selectAll(".tick:not(:first-of-type) line")
+        .attr("stroke", 'white')
+        .attr("stoke-opacity", 0.5))
+        // .attr("stroke-dasharray", "5,2"))
+      .call(g => g.selectAll(".tick text")
+        .attr("y", 4)
+        .attr("dx", 0))
+
+    // x label
+    xlabel
+      .attr("text-anchor", "middle")
+      .attr("x", (width-100)/2)
+      .attr("y", height + margin.bottom)
+      .text("Female Proportions");
+
+    // y label
+    ylabel
+    .attr("text-anchor", "middle")
+    .attr("transform", "rotate(-90)")
+    .attr("y", -30)
+    .attr("x", -height/2)
+    .text("Countries")
+
+    // chart title
+    title
+      .attr("text-anchor", "middle")
+      .attr("x", width/2)
+      .attr("y", -15)
+      .attr('fill', 'purple')
+      .attr('font-weight', 800)
+      .text("Female athlete proportions for each country");
+
+    // adding legends
+    legend1  // For atheletes
+      .attr("cx",width-80)
+      .attr("cy",height/2)
+      .attr("r", 3)
+      .style("fill", "#32527b")
+      .attr('opacity', 0.9)
+    legend1_text
+      .attr("x", width-70)
+      .attr("y", height/2)
+      .text("Athletes")
+      .style("font-size", "15px")
+      .attr("alignment-baseline","middle")
+    legend2
+      .attr("cx",width-80)
+      .attr("cy",height/2 + 20)
+      .attr("r", 3)
+      .style("fill", "#D3AC36")
+      .attr("stroke", '#FFB302')
+      .attr('opacity', 0.85)
+    legend2_text
+      .attr("x", width-70)
+      .attr("y", height/2 + 20)
+      .text("Medals").style("font-size", "15px")
+      .attr("alignment-baseline","middle")
+
+    // Adding first circle group
+    var dot = svg.selectAll("circle[id=c1]")
+      .data(dataFilter)
+
+
+    dot
+      .join("circle")
+      // .filter(function(){
+      //   return d3.select(this).attr("id") == 'c1';
+      // })
+      .attr("r", function(d) {
+        return d.Prop_F_Athletes == 'NA' ? 0 : 3
+      })
+      .transition()
+      .duration(1000)
+        .attr("cx", d => x(d.Prop_F_Athletes))
+        .attr("cy", d => y(d.NOC))
+        .attr('id', "c1")
+        .attr("fill", '#32527b')
+        .attr('opacity', 0.9)
+
+    // Adding first circle group
+    var dot2 = svg.selectAll("circle[id=c2]")
+      .data(dataFilter)
+
+    dot2
+      .join("circle")
+      .attr("r", function(d) {
+        return d.Prop_F_Medals == 'NA' ? 0 : 3
+      })
+      .transition()
+      .duration(1000)
+        .attr("cx", d => x(d.Prop_F_Medals))
+        .attr("cy", d => y(d.NOC))
+        .attr('id', "c2")
+        .attr("fill", '#D3AC36')
+        .attr('opacity', 0.85)
+        .attr("stroke", '#FFB302')
+
+      // Vertical line
+      vert_line
+        .attr("x1", (width-100)/2)
+        .attr("y1", 0)
+        .attr("x2", (width-100)/2)
+        .attr("y2", height)
+        .style("stroke-dasharray", "3,3")
+        .style("stroke", "green")
+        .style('fill', 'none')
+
+      // vertical line text "0.5"
+      vert_line_txt
+        .attr("text-anchor", "middle")
+        .attr("x", (width-100)/2)
+        .attr("y", height + 11)
+        .text("0.5")
+        .attr("fill", "green")
+        .style("font-size", "10");
+      
+    
+  }
+
+
+  // when the button ius changed, run the updateChart function
+  d3.select("#selectButton").on("change", function(event, d) {
+    // recover the option 
+    //"1912 - Before WW1", "1920 - After WW1", "1936 - Before WW2", "1936 - After WW2"
+    let selectedOption = d3.select(this).property('value');
+    if(selectedOption == "1912 - Before WW1"){
+      selectedOption = 1912
+    }
+    if(selectedOption == "1920 - After WW1"){
+      selectedOption = 1920
+    }
+    if(selectedOption == "1936 - Before WW2"){
+      selectedOption = 1936
+    }
+    if(selectedOption == "1948 - After WW2"){
+      selectedOption = 1948
+    }
+    console.log(selectedOption)
+    
+    update(selectedOption);
+    // rescale(selectedOption, dataFilter);
+  })
+
+})
+</script>
 
 
