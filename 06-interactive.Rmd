@@ -1,6 +1,5 @@
 # Interactive component
-```{r}
-htmltools::includeHTML("d3/shapes_new.html")
-```
+
+
 
 
