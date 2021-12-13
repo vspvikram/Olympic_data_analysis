@@ -1,0 +1,128 @@
+---
+title: "athelete_data_formatting"
+author: "Aniket Shahane"
+date: "12/6/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(tidyr)
+library(tidyverse)
+```
+
+
+
+```{r cars}
+data <- read.csv('athlete_events.csv')
+
+data <- data[order(data$Year), ]
+
+filtered_data <- filter(data, Team=="30. Februar")
+
+remove_filter <- c(34666, 127384)
+
+data <- data[-remove_filter, ]
+
+data <- data %>% drop_na(Medal)
+
+grouped_data <- data %>%
+  group_by(NOC, Year, Season) %>% 
+  summarise(n = n())
+
+grouped_data <- grouped_data[order(grouped_data$Year), ]
+
+grouped_data$Year <- as.Date(as.character(grouped_data$Year),format = "%Y")
+
+grouped_data <- grouped_data %>% 
+  rename(
+    date=Year,
+    name=NOC,
+    value=n
+  )
+
+summer_grouped_data <- filter(grouped_data, Season == 'Summer')
+
+winter_grouped_data <- filter(grouped_data, Season == 'Winter')
+
+sapply(grouped_data, class)
+
+write.csv(summer_grouped_data, '/Users/mrrobot/Downloads/medals_by_country_summer.csv', row.names = F)
+write.csv(winter_grouped_data, '/Users/mrrobot/Downloads/medals_by_country_winter.csv', row.names = F)
+
+write.csv(grouped_data, '/Users/mrrobot/Downloads/athletes.csv', row.names = F)
+```
+
+```{r pressure, echo=FALSE}
+
+world_data <- read.csv(url('https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world_population.csv'))
+
+head(world_data)
+
+
+average_medals_by_country <- grouped_data %>% 
+  group_by(name) %>%
+  summarise(avg_medals = ceiling(mean(value)))
+
+world_data <- world_data[c("name", "code")]
+
+world_data <- world_data %>%
+  rename(
+    country = name,
+    name = code,
+  )
+
+average_medals_by_country <- merge(x=average_medals_by_country, y=world_data, by='name', all.x=T)
+
+average_medals_by_country[complete.cases(average_medals_by_country),]
+
+max(average_medals_by_country$avg_medals)
+
+write.csv(average_medals_by_country, '/Users/mrrobot/Downloads/average_medals_by_country.csv', row.names = F)
+
+
+```
+
+
+```{r pressure, echo=FALSE}
+library(ggplot2)
+library(gridExtra)
+library(grid)
+counts <- data %>% 
+  filter(Sport != 'Art Competition') %>%
+  group_by(Year, Season) %>%
+  summarize(
+    Athletes = length(unique(Identity)),
+    Nations = length((unique(NOC))),
+    Events = length(unique(Event))
+  )
+# Athletes
+p1 <- ggplot(counts, aes(x=Year, y=Athletes, group=Season, color=Season)) + 
+  geom_point(size=2) + 
+  geom_line() + 
+  scale_color_manual(values=c('purple', 'darkred')) + 
+  xlab("") + 
+  annotate("text", x=c(1932, 1956, 1976, 1980),
+           y=c(2000, 2750, 6800, 4700),
+           label=c("LA 1932", "Melbourne 1956", "Montreal 1976", "Moscow 1980"),
+           size=3) 
+
+# Nations 
+p2 <- ggplot(counts, aes(x=Year, y=Nations, group=Season, color=Season)) + 
+  geom_point(size=2) + 
+  geom_line() +
+  scale_color_manual(values=c("purple", "darkred")) + 
+  xlab("") + 
+  annotate("text", x=c(1932, 1976, 1980),
+           y=c(60, 105, 70),
+           label=c("LA 1932", "Montreal 1956", "Moscow 1980"),
+           size=3)
+
+# Events
+p3 <- ggplot(counts, aes(x=Year, y=Events, group=Season, color=Season)) + 
+  geom_point(size=2) + 
+  geom_line() + 
+  scale_color_manual(values = c('purple', 'darkred')) 
+grid.arrange(p1, p2, p3, ncol=1)
+```
