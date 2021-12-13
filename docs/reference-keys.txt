@@ -3,11 +3,7 @@ data-sources
 data-transformation
 missing-values
 observations
+missing-values-1
 results
 interactive-component
 conclusion
-mycars-missing-patterns
-missing-value-plot-function
-setup-your-github-final-project-repo
-future-contributions-of-each-member
-missing-values-chapter

@@ -1,3 +1,6 @@
 # Interactive component
+```{r}
+htmltools::includeHTML("d3/shapes.html")
+```
 
 
