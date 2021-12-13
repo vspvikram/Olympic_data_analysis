@@ -14,6 +14,8 @@ library("grid")
 library("gridExtra")
 library("dplyr")
 library('ggrepel')
+library(ggplot2)
+library(reshape2)
 
 df <- read_csv("athlete_events.csv",
                  col_types = cols(
@@ -34,6 +36,8 @@ df <- read_csv("athlete_events.csv",
                    Medal = col_factor(levels = c("Gold","Silver","Bronze"))
                  )
 )
+
+df2 = read.csv('./athlete_events.csv')
 
 opts_chunk$set(warning=FALSE, message=FALSE)
 ```
@@ -56,6 +60,25 @@ p1 <- ggplot(counts, aes(x=Year, y=Athletes, group=Season, color=Season)) +
 
 ggplotly(p1, tooltip = c("Year", "Athletes"))
 ```
+
+```{r}
+# changing the year to match the summer games after 1992
+old_year <- c(1994,1998,2002,2006,2010,2014)
+new_year <- c(1996,2000,2004,2008,2012,2016)
+for (i in 1:length(old_year)){
+  df2$Year <- gsub(old_year[i], new_year[i], df$Year)
+}
+df2$Year = as.integer(df2$Year)
+
+df_gender = df2 %>% group_by(Year, Sex) %>% 
+  summarise(Athletes = length(unique(identity)))
+df_gender$Year = as.integer(df_gender$Year)
+
+ggplot(data=df_gender, aes(x=Year, y=Athletes, group=Sex)) +
+  geom_line(aes(color=Sex)) +
+  geom_point(aes(color=Sex))
+```
+
 
 ```{r, fig.width=11, fig.height=4}
 
