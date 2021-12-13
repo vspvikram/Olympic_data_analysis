@@ -63,20 +63,20 @@ ggplotly(p1, tooltip = c("Year", "Athletes"))
 
 ```{r}
 # changing the year to match the summer games after 1992
-old_year <- c(1994,1998,2002,2006,2010,2014)
-new_year <- c(1996,2000,2004,2008,2012,2016)
-for (i in 1:length(old_year)){
-  df2$Year <- gsub(old_year[i], new_year[i], df$Year)
-}
-df2$Year = as.integer(df2$Year)
-
-df_gender = df2 %>% group_by(Year, Sex) %>% 
-  summarise(Athletes = length(unique(identity)))
-df_gender$Year = as.integer(df_gender$Year)
-
-ggplot(data=df_gender, aes(x=Year, y=Athletes, group=Sex)) +
-  geom_line(aes(color=Sex)) +
-  geom_point(aes(color=Sex))
+# old_year <- c(1994,1998,2002,2006,2010,2014)
+# new_year <- c(1996,2000,2004,2008,2012,2016)
+# for (i in 1:length(old_year)){
+#   df2$Year <- gsub(old_year[i], new_year[i], df$Year)
+# }
+# df2$Year = as.integer(df2$Year)
+# 
+# df_gender = df2 %>% group_by(Year, Sex) %>% 
+#   summarise(Athletes = length(unique(identity)))
+# df_gender$Year = as.integer(df_gender$Year)
+# 
+# ggplot(data=df_gender, aes(x=Year, y=Athletes, group=Sex)) +
+  # geom_line(aes(color=Sex)) +
+  # geom_point(aes(color=Sex))
 ```
 
 

@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="missing-values.html"/>
-<link rel="next" href="results.html"/>
+<link rel="next" href="interactive-component.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -86,10 +86,12 @@
 <ul>
 <li class="chapter" data-level="4.1" data-path="missing-values.html"><a href="missing-values.html#observations"><i class="fa fa-check"></i><b>4.1</b> Observations</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="missing-values-1.html"><a href="missing-values-1.html"><i class="fa fa-check"></i><b>5</b> Missing values</a></li>
-<li class="chapter" data-level="6" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>6</b> Results</a></li>
-<li class="chapter" data-level="7" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>7</b> Interactive component</a></li>
-<li class="chapter" data-level="8" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>8</b> Conclusion</a></li>
+<li class="chapter" data-level="5" data-path="missing-values-1.html"><a href="missing-values-1.html"><i class="fa fa-check"></i><b>5</b> Missing values</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="missing-values-1.html"><a href="missing-values-1.html#results"><i class="fa fa-check"></i><b>5.1</b> # Results</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
+<li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -112,6 +114,108 @@
 <div id="missing-values-1" class="section level1" number="5">
 <h1><span class="header-section-number">Chapter 5</span> Missing values</h1>
 
+<div id="results" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> # Results</h2>
+<p>title: “Project”
+author: “Parth Gupta”
+date: “12/4/2021”
+output: html_document
+—</p>
+<div id="htmlwidget-d39ebcb0165284fb4652" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d39ebcb0165284fb4652">{"x":{"data":[{"x":[1896,1900,1904,1906,1908,1912,1920,1924,1928,1932,1936,1948,1952,1956,1960,1964,1968,1972,1976,1980,1984,1988,1992,1996,2000,2004,2008,2012,2016],"y":[176,1224,650,841,2024,2409,2676,3256,3247,1922,4484,4402,4932,3347,5352,5137,5558,7114,6073,5259,6798,8454,9386,10339,10647,10557,10899,10517,11179],"text":["Year: 1896<br />Athletes:   176","Year: 1900<br />Athletes:  1224","Year: 1904<br />Athletes:   650","Year: 1906<br />Athletes:   841","Year: 1908<br />Athletes:  2024","Year: 1912<br />Athletes:  2409","Year: 1920<br />Athletes:  2676","Year: 1924<br />Athletes:  3256","Year: 1928<br />Athletes:  3247","Year: 1932<br />Athletes:  1922","Year: 1936<br />Athletes:  4484","Year: 1948<br />Athletes:  4402","Year: 1952<br />Athletes:  4932","Year: 1956<br />Athletes:  3347","Year: 1960<br />Athletes:  5352","Year: 1964<br />Athletes:  5137","Year: 1968<br />Athletes:  5558","Year: 1972<br />Athletes:  7114","Year: 1976<br />Athletes:  6073","Year: 1980<br />Athletes:  5259","Year: 1984<br />Athletes:  6798","Year: 1988<br />Athletes:  8454","Year: 1992<br />Athletes:  9386","Year: 1996<br />Athletes: 10339","Year: 2000<br />Athletes: 10647","Year: 2004<br />Athletes: 10557","Year: 2008<br />Athletes: 10899","Year: 2012<br />Athletes: 10517","Year: 2016<br />Athletes: 11179"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(255,0,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(255,0,0,1)"}},"hoveron":"points","name":"Summer","legendgroup":"Summer","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(255,0,0,1)","dash":"solid"},"frame":null},{"x":[1924,1928,1932,1936,1948,1952,1956,1960,1964,1968,1972,1976,1980,1984,1988,1992,1994,1998,2002,2006,2010,2014],"y":[313,461,252,668,668,694,821,665,1094,1160,1008,1128,1071,1273,1425,1801,1738,2179,2399,2494,2536,2745],"text":["Year: 1924<br />Athletes:   313","Year: 1928<br />Athletes:   461","Year: 1932<br />Athletes:   252","Year: 1936<br />Athletes:   668","Year: 1948<br />Athletes:   668","Year: 1952<br />Athletes:   694","Year: 1956<br />Athletes:   821","Year: 1960<br />Athletes:   665","Year: 1964<br />Athletes:  1094","Year: 1968<br />Athletes:  1160","Year: 1972<br />Athletes:  1008","Year: 1976<br />Athletes:  1128","Year: 1980<br />Athletes:  1071","Year: 1984<br />Athletes:  1273","Year: 1988<br />Athletes:  1425","Year: 1992<br />Athletes:  1801","Year: 1994<br />Athletes:  1738","Year: 1998<br />Athletes:  2179","Year: 2002<br />Athletes:  2399","Year: 2006<br />Athletes:  2494","Year: 2010<br />Athletes:  2536","Year: 2014<br />Athletes:  2745"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(0,0,255,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,0,255,1)"}},"hoveron":"points","name":"Winter","legendgroup":"Winter","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(0,0,255,1)","dash":"solid"},"frame":null},{"x":[1900,1932,1956,1976,1980,1992,2016],"y":[-100,1400,2750,7400,4700,800,10000],"text":["Athens 1896","L.A. 1932","Melbourne 1956","Montreal 1976","Moscow 1980","Change in Winter Olympics in 1992","Rio 2016"],"hovertext":["","","","","","",""],"textfont":{"size":11.3385826771654,"color":"rgba(0,0,0,1)"},"type":"scatter","mode":"text","hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1916,1942],"y":[6500,6500],"text":["World War I","World War II"],"hovertext":["",""],"textfont":{"size":15.1181102362205,"color":"rgba(0,0,0,1)"},"type":"scatter","mode":"text","hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918,null,1914,1918],"y":[6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000],"text":"","type":"scatter","mode":"lines","line":{"width":7.55905511811024,"color":"rgba(139,0,0,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945,null,1939,1945],"y":[6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000,null,6000,6000],"text":"","type":"scatter","mode":"lines","line":{"width":7.55905511811024,"color":"rgba(139,0,0,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":43.7625570776256,"r":7.30593607305936,"b":40.1826484018265,"l":48.9497716894977},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"title":{"text":"Number of Olympians in Summer and Winter Olympics from 1896 to 2016","font":{"color":"rgba(0,0,0,1)","family":"","size":17.5342465753425},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[1890,2022],"tickmode":"array","ticktext":["1890","1920","1950","1980","2010"],"tickvals":[1890,1920,1950,1980,2010],"categoryorder":"array","categoryarray":["1890","1920","1950","1980","2010"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"Years","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-663.95,11742.95],"tickmode":"array","ticktext":["0","3000","6000","9000"],"tickvals":[0,3000,6000,9000],"categoryorder":"array","categoryarray":["0","3000","6000","9000"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"Number of Olympians","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"title":{"text":"Season","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"54be53ba6fb5":{"x":{},"y":{},"colour":{},"type":"scatter"},"54be74fbff04":{"x":{},"y":{},"colour":{}},"54be4c239b9c":{"x":{},"y":{}},"54be35bd45d1":{"x":{},"y":{}},"54be1d32b7e7":{"x":{},"y":{},"colour":{},"xend":{},"yend":{}},"54be6cc7adaa":{"x":{},"y":{},"colour":{},"xend":{},"yend":{}}},"cur_data":"54be53ba6fb5","visdat":{"54be53ba6fb5":["function (y) ","x"],"54be74fbff04":["function (y) ","x"],"54be4c239b9c":["function (y) ","x"],"54be35bd45d1":["function (y) ","x"],"54be1d32b7e7":["function (y) ","x"],"54be6cc7adaa":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-4e3672dfe62aa699db3c" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4e3672dfe62aa699db3c">{"x":{"data":[{"x":[1896,1900,1904,1906,1908,1912,1920,1924,1928,1932,1936,1948,1952,1956,1960,1964,1968,1972,1976,1980,1984,1988,1992,1996,2000,2004,2008,2012,2016],"y":[176,1201,644,835,1980,2324,2588,3228,3031,1440,4208,4270,4993,3651,5260,5350,5723,6856,5710,4972,6221,7359,7973,8036,7968,7766,7828,7364,7788],"text":["Year: 1896<br />Athletes:  176","Year: 1900<br />Athletes: 1201","Year: 1904<br />Athletes:  644","Year: 1906<br />Athletes:  835","Year: 1908<br />Athletes: 1980","Year: 1912<br />Athletes: 2324","Year: 1920<br />Athletes: 2588","Year: 1924<br />Athletes: 3228","Year: 1928<br />Athletes: 3031","Year: 1932<br />Athletes: 1440","Year: 1936<br />Athletes: 4208","Year: 1948<br />Athletes: 4270","Year: 1952<br />Athletes: 4993","Year: 1956<br />Athletes: 3651","Year: 1960<br />Athletes: 5260","Year: 1964<br />Athletes: 5350","Year: 1968<br />Athletes: 5723","Year: 1972<br />Athletes: 6856","Year: 1976<br />Athletes: 5710","Year: 1980<br />Athletes: 4972","Year: 1984<br />Athletes: 6221","Year: 1988<br />Athletes: 7359","Year: 1992<br />Athletes: 7973","Year: 1996<br />Athletes: 8036","Year: 2000<br />Athletes: 7968","Year: 2004<br />Athletes: 7766","Year: 2008<br />Athletes: 7828","Year: 2012<br />Athletes: 7364","Year: 2016<br />Athletes: 7788"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":7.55905511811024,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"M","legendgroup":"M","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)","dash":"solid"},"frame":null},{"x":[1900,1904,1906,1908,1912,1920,1924,1928,1932,1936,1948,1952,1956,1960,1964,1968,1972,1976,1980,1984,1988,1992,1996,2000,2004,2008,2012,2016],"y":[23,6,6,44,53,77,148,302,147,410,470,629,516,757,880,994,1266,1490,1358,1846,2514,3210,4037,4854,5183,5562,5686,6133],"text":["Year: 1900<br />Athletes:   23","Year: 1904<br />Athletes:    6","Year: 1906<br />Athletes:    6","Year: 1908<br />Athletes:   44","Year: 1912<br />Athletes:   53","Year: 1920<br />Athletes:   77","Year: 1924<br />Athletes:  148","Year: 1928<br />Athletes:  302","Year: 1932<br />Athletes:  147","Year: 1936<br />Athletes:  410","Year: 1948<br />Athletes:  470","Year: 1952<br />Athletes:  629","Year: 1956<br />Athletes:  516","Year: 1960<br />Athletes:  757","Year: 1964<br />Athletes:  880","Year: 1968<br />Athletes:  994","Year: 1972<br />Athletes: 1266","Year: 1976<br />Athletes: 1490","Year: 1980<br />Athletes: 1358","Year: 1984<br />Athletes: 1846","Year: 1988<br />Athletes: 2514","Year: 1992<br />Athletes: 3210","Year: 1996<br />Athletes: 4037","Year: 2000<br />Athletes: 4854","Year: 2004<br />Athletes: 5183","Year: 2008<br />Athletes: 5562","Year: 2012<br />Athletes: 5686","Year: 2016<br />Athletes: 6133"],"type":"scatter","mode":"markers+lines","marker":{"autocolorscale":false,"color":"rgba(0,191,196,1)","opacity":1,"size":7.55905511811024,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)"}},"hoveron":"points","name":"F","legendgroup":"F","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)","dash":"solid"},"frame":null}],"layout":{"margin":{"t":43.7625570776256,"r":7.30593607305936,"b":40.1826484018265,"l":48.9497716894977},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"title":{"text":"Number of male and female Olympians over time","font":{"color":"rgba(0,0,0,1)","family":"","size":17.5342465753425},"x":0.5,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[1890,2022],"tickmode":"array","ticktext":["1890","1920","1950","1980","2010"],"tickvals":[1890,1920,1950,1980,2010],"categoryorder":"array","categoryarray":["1890","1920","1950","1980","2010"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"Year","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-395.5,8437.5],"tickmode":"array","ticktext":["0","2000","4000","6000","8000"],"tickvals":[0,2000,4000,6000,8000],"categoryorder":"array","categoryarray":["0","2000","4000","6000","8000"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"Athletes","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"title":{"text":"Sex","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"54be1a090afb":{"x":{},"y":{},"colour":{},"type":"scatter"},"54be47aff217":{"x":{},"y":{},"colour":{}}},"cur_data":"54be1a090afb","visdat":{"54be1a090afb":["function (y) ","x"],"54be47aff217":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-14-1.png" width="1056" /><img src="finalproj_files/figure-html/unnamed-chunk-14-2.png" width="1056" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+<img src="finalproj_files/figure-html/unnamed-chunk-16-1.png" width="672" />
+<img src="finalproj_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+Initially we considered the plots from 1896 but since female participants were very less till 1912 and then there was first world war so we have decided to consider athletes from 1924 as were have sufficient data from that year onwards.</p>
+<p>It is clearly evident from the above plot that Male athletes are taller and heavier than female athletes in general.
+<img src="finalproj_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+In this plot we have compared the average weight and average height for athletes in 2016 Olympics in Gymnastics and Basketball. Also, Athletes who play Basketball are taller and heavier than who do Gymnastics.</p>
+<p>17-year-old Brazilian gymnast Flavia Saraiva, is the lightest athletes at only 31kg (68 lbs) and she was also the shortest. Also, Basketball players are very tall and heavy.</p>
+<pre><code>## # A tibble: 1,400 × 6
+## # Groups:   Sport [56]
+##      Sex   Age Height Weight  Year Sport        
+##    &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt; &lt;chr&gt;        
+##  1     0    22    160     56  1994 Alpine Skiing
+##  2     1    26    179     79  1964 Alpine Skiing
+##  3     1    23    183     98  1998 Alpine Skiing
+##  4     0    22    164     60  2006 Alpine Skiing
+##  5     0    24    175     76  2006 Alpine Skiing
+##  6     1    24    180     92  2002 Alpine Skiing
+##  7     1    22    175     75  1998 Alpine Skiing
+##  8     0    24    172     68  1992 Alpine Skiing
+##  9     0    24    175     66  1968 Alpine Skiing
+## 10     0    19    165     59  1956 Alpine Skiing
+## # … with 1,390 more rows</code></pre>
+<pre><code>## # A tibble: 1,400 × 4
+##      Sex   Age Height Weight
+##    &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+##  1     0    22    160     56
+##  2     1    26    179     79
+##  3     1    23    183     98
+##  4     0    22    164     60
+##  5     0    24    175     76
+##  6     1    24    180     92
+##  7     1    22    175     75
+##  8     0    24    172     68
+##  9     0    24    175     66
+## 10     0    19    165     59
+## # … with 1,390 more rows</code></pre>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-20-1.png" width="672" />
+The dataset we are working on is the Olympic Games dataset that we scraped from <a href="http://www.olympedia.org/" class="uri">http://www.olympedia.org/</a>. It includes all the Games from Athens 1896 to Rio 2016. #The R code I used to scrape and wrangle the data is on GitHub.#</p>
+<p>The file athlete_events.csv contains 271116 rows and 15 columns. Each row corresponds to an athlete competing in a particular Olympic event. The columns are:
+Identity - Unique number for each athlete
+Name - Athlete’s name
+Sex - M or F
+Age - Integer
+Height - In centimeters
+Weight - In kilograms
+Team - Team name
+NOC - National Olympic Committee 3-letter code
+Games - Year and season
+Year - Integer between 1896 to 2016
+Season - Summer or Winter
+City - Host city
+Sport - Sport
+Event - Event
+Medal - Gold, Silver, Bronze, or NA</p>
+<p>After 1992, the Winter and Summer Games were held in different years.
+Winter Games occurred every four years starting from 1994, and Summer Games occurred every four years beginning in 1996.</p>
+<p>Plot-1
+The above graph shows the participation of athletes from 1896 to 2016.
+Key Observations:-
+1) Modern Olympics were first organized in Athens with all-male participants from 12 countries. Winter Olympics were introduced in 1924.
+2) After 1992, the Winter and Summer Games were held in different years.
+Winter Games occurred every four years starting from 1994, and Summer Games occurred every four years beginning in 1996.
+3) We can also observe that no Olympics were organized between 1912 to 1920 and 1936 to 1948 because of World War I and World War II.
+4) During the Olympics at Los Angeles in 1932, the participation dipped because the Olympics were held during the great depression.
+5) During the 1976 Olympics at Montreal, there was a dip in attendance because 25 nations decided to boycott the Olympics in retaliation for apartheid policies in South Africa.
+6) During Olympics at Moscow in 1980, the number of Olympics who participated decreased because 66 nations decided to boycott the Olympics.
+7) Winter Olympics have much less participation than summer Olympics because ice and snow sports are not practical or popular in most nations due to climate conditions. This doesn’t appear to change anytime soon.
+8) 2016 Summer Olympics was held in Rio, and it had maximum participation.</p>
+<p>Plot 2)
+The above plot is a boxplot of participants’ age from the Olympics in 1896 to 2016.</p>
+<ol style="list-style-type: decimal">
+<li>the median age of male participants from 1896 to 2016 is between 23-26. And the median age remains almost constant.</li>
+<li>The Youngest Olympian of all time was Dimitrios Loundras of Greece, who at age 10 in 1896 won a bronze medal in gymnastics, which can be seen as an outlier in the year 1896.</li>
+<li>The oldest Olympian medalist of all time was a Swedish shooter Oscar Swahn, who was 72 years, 280 days old when he won a silver medal in the 1920 Olympics.</li>
+<li>Female Olympians were allowed after 1920, so there is no data for 1896. The median age of female Olympians first increases, then it stabilizes.</li>
+<li>Also, the spread of female participants is less than that of the male participants.</li>
+</ol>
+<p>Plot 3)</p>
+<p>Initially, we considered the plots from 1896, but since female participants were very few till 1912 and then there was the first world war, so we have decided to consider athletes from 1924 as were have sufficient data from that year onwards.</p>
+<p>It is clearly evident from the above plot that Male athletes are taller and heavier than female athletes in general for all the Olympics from 1896 to 2016.</p>
+<p>In this plot, we have compared the average weight and average height for athletes in the 2016 Olympics in Gymnastics and Basketball. Also, Athletes who play Basketball are taller and heavier than those who do Gymnastics.</p>
+<p>17-year-old Brazilian gymnast Flavia Saraiva is the lightest athlete at only 31kg (68 lbs), and she was also the shortest. In general, Basketball players are very tall and heavy.</p>
+<p>Plot 4)
+This plot is the distribution of different sports based on the average height and average weight for the athletes from 1896 to 2016.
+We can see that athletes playing sports like Tug of War, Basketball, Baseball, and Bobsleigh are some of the tallest and heaviest athletes.
+On the other end, athletes who do Gymnastics, Synchronized Swimming, Diving, Rhythmic Gymnastics are very light and short.
+And most of the sports lie in between the extreme ends like football, boxing, fencing.</p>
+
+</div>
 </div>
             </section>
 
@@ -119,7 +223,7 @@
         </div>
       </div>
 <a href="missing-values.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="results.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="interactive-component.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
