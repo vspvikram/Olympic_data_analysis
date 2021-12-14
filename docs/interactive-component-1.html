@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 7 Interactive component | Project</title>
+  <meta name="description" content="Chapter 7 Interactive component | Project" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 7 Interactive component | Project" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 7 Interactive component | Project" />
+  
+  
+  
+
+<meta name="author" content="Parth Gupta" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="interactive-component.html"/>
+<link rel="next" href="conclusion.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">SHORT TITLE HERE</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a></li>
+<li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a></li>
+<li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="missing-values.html"><a href="missing-values.html#observations"><i class="fa fa-check"></i><b>4.1</b> Observations</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="results.html"><a href="results.html#female-participation"><i class="fa fa-check"></i><b>5.1</b> Female Participation</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
+<li class="chapter" data-level="7" data-path="interactive-component-1.html"><a href="interactive-component-1.html"><i class="fa fa-check"></i><b>7</b> Interactive component</a></li>
+<li class="chapter" data-level="8" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>8</b> Conclusion</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Project</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="interactive-component-1" class="section level1" number="7">
+<h1><span class="header-section-number">Chapter 7</span> Interactive component</h1>
+<script src="https://d3js.org/d3.v7.js"></script>
+<h2 style="text-align: center;">
+Countries Shaded by the Average Number of Medals Won in Olympics’ Games
+</h2>
+<h3>
+Choose the type of medal
+</h3>
+<p><select id="selectButton" style="display: block;"></select></p>
+<svg id="my_dataviz" width="600" height="600">
+</svg>
+<div id="my_dataviz2">
+
+</div>
+<script>
+
+// The svg
+var svg = d3.select("svg"),
+  width = +svg.attr("width"),
+  height = +svg.attr("height");
+
+// Map and projection
+var path = d3.geoPath();
+var projection = d3.geoMercator()
+  .scale(70)
+  .center([0,20])
+  .translate([width / 2, height / 2]);
+
+// Data and color scale
+var data = new Map();
+
+const COLOR_SCALES = {
+  "Gold": d3.scaleThreshold()
+  .domain([0, 5, 10, 15, 25, 40, 80, 130])
+  .range(d3.schemeOranges[8]),
+  "Silver": d3.scaleThreshold()
+  .domain([0, 5, 15, 20, 35, 40, 50, 75])
+  .range(d3.schemeGreys[8]),
+  "Bronze": d3.scaleThreshold()
+  .domain([0, 5, 15, 20, 35, 40, 50, 80])
+  .range(d3.schemeReds[8]),
+}
+
+const allGroup = ["Gold", "Silver", "Bronze"]
+
+// add the options to the button
+d3.select("#selectButton")
+  .selectAll('myOptions')
+    .data(allGroup)
+  .enter()
+  .append('option')
+  .text(function (d) { return d; }) // text showed in the menu
+  .attr("value", function (d) { return d; }) // corresponding value returned by the button
+
+      // When the button is changed, run the updateChart function
+d3.select("#selectButton").on("change", function(event,d) {
+  // recover the option that has been chosen
+  const selectedOption = d3.select(this).property("value")
+  // run the updateChart function with this selected option
+  console.log(selectedOption);
+  plot_graph(medal_type = selectedOption);
+})
+
+const plot_graph = (medal_type = "Gold") => {
+
+Promise.all([
+  d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson"),
+  d3.csv("https://raw.githubusercontent.com/vspvikram/Olympic_data_analysis/main/Data/data_by_medals_country_avg.csv", function(d) { 
+    if (d.medal == medal_type) {
+      data.set(d.name, {avg_medals: d.avg_medals, medal: d.medal, country: d.country});
+    }
+  })]).then(function(loadData){
+      let topo = loadData[0];
+      // List of groups (here I have one group per column)
+      var colorScale = COLOR_SCALES[medal_type];
+      let Tooltip = d3.select("#my_dataviz2")
+                      .append("div")
+                      .attr("class", "tooltip")
+                      .style("visibility", "hidden")
+                      .style("position", "absolute")
+                      .style("background-color", "white")
+                      .style("border", "solid")
+                      .style("border-width", "2px")
+                      .style("border-radius", "5px")
+                      .style("padding", "5px");
+  
+let mouseOver = function(d) {
+  d3.selectAll(".Country")
+    .transition()
+    .duration(200)
+    .style("opacity", .5)
+  d3.select(this)
+    .transition()
+    .duration(200)
+    .style("opacity", 1)
+    .style("stroke", "black");
+  Tooltip.style("visibility",  "visible");
+}
+
+let mouseMove = function(event, data) {
+if(data.total.avg_medals === undefined) {
+  Tooltip
+    .html("Country: " + data.properties.name + "<br>" + "Average Medals: " + "0")
+    .style("left", (d3.pointer(event)[0]+10) + "px")
+    .style("top", (d3.pointer(event)[1]) + "px");
+} else {
+  Tooltip
+      .html("Country: " + data.properties.name + "<br>" + "Average Medals: " + data.total.avg_medals)
+      .style("left", (d3.pointer(event)[0]+10) + "px")
+      .style("top", (d3.pointer(event)[1]) + "px");
+}
+}
+
+let mouseLeave = function(d) {
+d3.selectAll(".Country")
+  .transition()
+  .duration(200)
+  .style("opacity", .8)
+d3.select(this)
+  .transition()
+  .duration(200)
+  .style("stroke", "none");
+  Tooltip.style("visibility", "hidden");
+}
+// Draw the map
+svg.append("g")
+.selectAll("path")
+.data(topo.features)
+.enter()
+.append("path")
+  // draw each country
+  .attr("d", d3.geoPath()
+    .projection(projection)
+  )
+  // set the color of each country
+  .attr("fill", function (d) {
+    if (d.id === undefined) {
+      d.total = {avg_medals: 0};
+    } else {
+      d.total = data.get(d.id)|| 0;
+    }
+    return colorScale(d.total.avg_medals);
+  })
+  .style("stroke", "transparent")
+  .attr("class", function(d){ return "Country" } )
+  .style("opacity", .8)
+  .on("mouseover", mouseOver )
+  .on("mousemove", mouseMove )
+  .on("mouseleave", mouseLeave )
+})
+}
+
+plot_graph();
+</script>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="interactive-component.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="conclusion.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/YOUR GITHUB USERNAME/YOUR REPO NAME/edit/main/06-interactive.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/YOUR GITHUB USERNAME/YOUR REPO NAME/blob/main/06-interactive.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

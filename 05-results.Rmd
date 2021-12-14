@@ -1,10 +1,4 @@
 # Results
----
-title: "Project"
-author: "Parth Gupta"
-date: "12/4/2021"
-output: html_document
----
 
 ```{r}
 library("plotly")
@@ -15,8 +9,7 @@ library("grid")
 library("gridExtra")
 library("dplyr")
 library('ggrepel')
-library(ggplot2)
-library(reshape2)
+
 
 df <- read_csv("athlete_events.csv",
                  col_types = cols(
@@ -38,15 +31,18 @@ df <- read_csv("athlete_events.csv",
                  )
 )
 
-df2 = read.csv('./athlete_events.csv')
-
 opts_chunk$set(warning=FALSE, message=FALSE)
 ```
+
+## Number of Olympians in Summer and Winter Olympics from 1896 to 2016
+
 ```{r}
 
-counts <- df %>% group_by(Year, Season) %>% summarize(Athletes = length(unique(identity)),)
+counts <- df %>% group_by(Year, Season) %>% summarize(Athletes = length(unique(identity)),
+    Nations = length(unique(NOC)),
+    Events = length(unique(Event)))
 
-p1 <- ggplot(counts, aes(x=Year, y=Athletes, group=Season, color=Season)) +
+athletes__ <- ggplot(counts, aes(x=Year, y=Athletes, group=Season, color=Season)) +
   geom_point(size=1.5) +
   geom_line() +
   scale_color_manual(values=c("red","blue")) +
@@ -59,37 +55,67 @@ p1 <- ggplot(counts, aes(x=Year, y=Athletes, group=Season, color=Season)) +
   geom_segment(mapping=aes(x=1914,y=6000,xend=1918,yend=6000),color="darkred", size=2) +
   geom_segment(mapping=aes(x=1939,y=6000,xend=1945,yend=6000),color="darkred", size=2)
 
-ggplotly(p1, tooltip = c("Year", "Athletes"))
+ggplotly(athletes__, tooltip = c("Year", "Athletes"))
+
 ```
+
+The above graph shows the participation of athletes from 1896 to 2016.
+
+**Key Observations:-**
+
+1) Modern Olympics were first organized in Athens with all-male participants from 12 countries. Winter Olympics were introduced in 1924.
+2) After 1992, the Winter and Summer Games were held in different years. 
+Winter Games occurred every four years starting from 1994, and Summer Games occurred every four years beginning in 1996.
+3) We can also observe that no Olympics were organized between 1912 to 1920 and 1936 to 1948 because of World War I and World War II.
+4) During the Olympics at Los Angeles in 1932, the participation dipped because the Olympics were held during the great depression.
+5) During the 1976 Olympics at Montreal, there was a dip in attendance because 25 nations decided to boycott the Olympics in retaliation for apartheid policies in South Africa.
+6) During Olympics at Moscow in 1980, the number of Olympics who participated decreased because 66 nations decided to boycott the Olympics.
+7) Winter Olympics have much less participation than summer Olympics because ice and snow sports are not practical or popular in most nations due to climate conditions. This doesn't appear to change anytime soon.
+8) 2016 Summer Olympics was held in Rio, and it had maximum participation.
+
+
+## Number of Events and Nations in Summer and Winter Olympics
+
 
 ```{r}
-# Exclude art competitions from data (I won't use them again in the kernel)
-data <- df %>% filter(Sport != "Art Competitions")
 
-# Recode year of Winter Games after 1992 to match the next Summer Games
-# Thus, "Year" now applies to the Olympiad in which each Olympics occurred 
-original <- c(1994,1998,2002,2006,2010,2014)
-new <- c(1996,2000,2004,2008,2012,2016)
-for (i in 1:length(original)) {
-  data$Year <- gsub(original[i], new[i], data$Year)
-}
-data$Year <- as.integer(data$Year)
-
-# Table counting number of athletes by Year and Sex
-counts_sex <- data %>% group_by(Year, Sex) %>%
-  summarize(Athletes = length(unique(identity)))
-counts_sex$Year <- as.integer(counts_sex$Year)
-
-# Plot number of male/female athletes vs time
-p2 <- ggplot(counts_sex, aes(x=Year, y=Athletes, group=Sex, color=Sex)) +
+nations__ <- ggplot(counts, aes(x=Year, y=Nations, group=Season, color=Season)) +
   geom_point(size=2) +
-  geom_line()  +
-  labs(title = "Number of male and female Olympians over time") +
-  theme(plot.title = element_text(hjust = 0.5))
+  geom_line() +
+  scale_color_manual(values=c("red","blue")) +
+  xlab("") +  
+  annotate("text", x=c(1980),
+           y=c(70),
+           label=c("Moscow 1980"),
+           size=3) + theme(legend.position = "none")
 
-ggplotly(p2, tooltip = c("Year", "Athletes"))
+
+events__<- ggplot(counts, aes(x=Year, y=Events, group=Season, color=Season)) +
+  geom_point(size=2) +
+  geom_line() +
+  scale_color_manual(values=c("red","blue")) +
+  annotate("text", x=c(1924),
+           y=c(100),
+           label=c("Paris 1924"),
+           size=3) +
+  theme(legend.position="bottom")
+
+grid.arrange(nations__, events__, heights = c(1, 1.25)) 
+
 ```
 
+**Observations-**
+
+1) The 1924 Olympic games were held in Paris, France. Some sports were dropped like archery, field hockey and tug-of-war. Figure skating and ice hockey were moved to the Winter Olympics program and no new sports were added.
+
+2) The proportion of nations participating in the winter Olympics is very less compared to summer Olympics because a lot of nations don't have the necessary climate conditions to train and participate in the winter Olympics.
+
+3) During Olympics at Moscow in 1980, the number nations dropped significantly because 66 nations including united nations of america decided to boycott the Olympics in protest to Russian policies.
+4) After 2000 the number of nations that are participating in summer and winter Olympics are almost constant around 200.
+5) From 1920 to 2000, there is increase in number of events every Olympics and after 2000 the number of events have saturated for summer Olympics but there is still some scope of growth for winter Olympics around 300.
+
+
+## Distribution of Age of participants and Medalists
 
 ```{r, fig.width=11, fig.height=4}
 
@@ -110,112 +136,45 @@ ggplot(women_age, aes(y = Age, x = as.factor(Year))) +
 
 ```
 
+### Distribution of Age of Medal winner in Summer Olympics
+
 ```{r}
-age_m <- df%>%filter(!is.na(Age), Season=='Summer')
-age_m$Medal <- ifelse(is.na(age_m$Medal),"No medal",ifelse(age_m$Medal=="Gold","Gold",ifelse(age_m$Medal=="Silver","Silver","Bronze")))
+age_medal <- df%>%filter(!is.na(Age), Season=='Summer')
+age_medal$Medal <- ifelse(is.na(age_medal$Medal),"No medal",ifelse(age_medal$Medal=="Gold","Gold",ifelse(age_medal$Medal=="Silver","Silver","Bronze")))
 
 order <- c('Gold', 'Silver', 'Bronze', 'No medal')
 
-age_m$Medal <- fct_relevel(age_m$Medal, order)
+age_medal$Medal <- fct_relevel(age_medal$Medal, order)
 
-bp <-ggplot(age_m, aes(y = Age, x = Medal, fill= Medal)) +
+bp <-ggplot(age_medal, aes(y = Age, x = Medal, fill= Medal)) +
   geom_boxplot()+ 
-  labs(title = "Distribution of Age of olympians",
+  labs(title = "Distribution of Age of olympians in Summer Olympics",
        x = "Medal type",
        y = "Age") + facet_grid(cols = vars(Sex))
 bp + scale_fill_manual(breaks = c("Gold", "Silver", "Bronze", 'No medal'), 
                        values=c("#C9B037", "#D7D7D7", "#6A3805", 'black'))
 ```
+
+### Distribution of Age of Medal winner in Winter Olympics
+
 ```{r}
-age_m <- df%>%filter(!is.na(Age), Season=='Winter')
-age_m$Medal <- ifelse(is.na(age_m$Medal),"No medal",ifelse(age_m$Medal=="Gold","Gold",ifelse(age_m$Medal=="Silver","Silver","Bronze")))
+age_medal <- df%>%filter(!is.na(Age), Season=='Winter')
+age_medal$Medal <- ifelse(is.na(age_medal$Medal),"No medal",ifelse(age_medal$Medal=="Gold","Gold",ifelse(age_medal$Medal=="Silver","Silver","Bronze")))
 
 order <- c('Gold', 'Silver', 'Bronze', 'No medal')
 
-age_m$Medal <- fct_relevel(age_m$Medal, order)
+age_medal$Medal <- fct_relevel(age_medal$Medal, order)
 
-bp <-ggplot(age_m, aes(y = Age, x = Medal, fill= Medal)) +
+bp <-ggplot(age_medal, aes(y = Age, x = Medal, fill= Medal)) +
   geom_boxplot()+ 
-  labs(title = "Distribution of Age of olympians",
+  labs(title = "Distribution of Age of olympians in Winter Olympics",
        x = "Medal type",
        y = "Age") + facet_grid(cols = vars(Sex))
 bp + scale_fill_manual(breaks = c("Gold", "Silver", "Bronze", 'No medal'), 
                        values=c("#C9B037", "#D7D7D7", "#6A3805", 'black'))
 ```
-```{r}
-features <- df[,c(3:6,10,13)]
-features <- features[complete.cases(features), ] 
-features %>% filter(Year >= 1924) %>% ggplot(aes(y = Height, x = Weight)) + geom_density_2d(aes(color = as.factor(Sex))) + facet_wrap(.~Year)
-```
-Initially we considered the plots from 1896 but since female participants were very less till 1912 and then there was first world war so we have decided to consider athletes from 1924 as were have sufficient data from that year onwards.
 
-It is clearly evident from the above plot that Male athletes are taller and heavier than female athletes in general.
-```{r}
-gym<-features %>% filter(Year == 2016) %>% filter(Sport == "Gymnastics") %>% ggplot(aes(x = Height, y = Weight)) + geom_density_2d(aes(color = as.factor(Sex))) + xlim(c(120, 220)) + ylim(30, 150) + theme(legend.position = "none")
-basket<-features %>% filter(Year == 2016) %>% filter(Sport == "Basketball") %>% ggplot(aes(x = Height, y = Weight)) + geom_density_2d(aes(color = as.factor(Sex))) + xlim(c(120, 220)) + ylim(30, 150)
-
-grid.arrange(gym, basket, nrow = 1,  widths = c(1.25, 1.75))
-```
-In this plot we have compared the average weight and average height for athletes in 2016 Olympics in Gymnastics and Basketball.  Also, Athletes who play Basketball are taller and heavier than who do Gymnastics. 
-
-17-year-old Brazilian gymnast Flavia Saraiva, is the lightest athletes at only 31kg (68 lbs) and she was also the shortest. Also, Basketball players are very tall and heavy. 
-```{r}
-options(ggrepel.max.overlaps = Inf)
-features <- features %>% group_by(Sport) %>% sample_n(25, replace =  TRUE)
-
-features <- features %>% mutate(Sex = ifelse(Sex == "M",1,0))
-features
-```
-```{r ,fig.width= 7, fig.height= 7}
-cfeat <- features[,c(1:4)]
-cfeat
-
-clust <- kmeans(scale(cfeat), 25)
-labels <- clust$cluster
-
-cfeat <- cfeat %>% mutate(labels = labels) %>% mutate(Year = features$Year) %>% mutate(Sport = features$Sport) %>% mutate(Age = features$Age)
-
-sportMean <- cfeat %>% group_by(Sport) %>% mutate(sportAvgHeight = mean(Height)) %>% mutate(sportAvgWeight = mean(Weight))
-sportMean <- distinct(sportMean,Sport, .keep_all = TRUE)
-sportMean %>% ggplot() + geom_label_repel(aes(label = Sport,x = sportAvgHeight, y = sportAvgWeight), size = 4)
-
-```
-The dataset we are working on is the Olympic Games dataset that we scraped from http://www.olympedia.org/. It includes all the Games from Athens 1896 to Rio 2016. #The R code I used to scrape and wrangle the data is on GitHub.#
-
-The file athlete_events.csv contains 271116 rows and 15 columns. Each row corresponds to an athlete competing in a particular Olympic event. The columns are:
-Identity - Unique number for each athlete
-Name - Athlete's name
-Sex - M or F
-Age - Integer
-Height - In centimeters
-Weight - In kilograms
-Team - Team name
-NOC - National Olympic Committee 3-letter code
-Games - Year and season
-Year - Integer between 1896 to 2016
-Season - Summer or Winter
-City - Host city
-Sport - Sport
-Event - Event
-Medal - Gold, Silver, Bronze, or NA
-
-After 1992, the Winter and Summer Games were held in different years. 
-Winter Games occurred every four years starting from 1994, and Summer Games occurred every four years beginning in 1996. 
-
-Plot-1
-The above graph shows the participation of athletes from 1896 to 2016.
-Key Observations:-
-1) Modern Olympics were first organized in Athens with all-male participants from 12 countries. Winter Olympics were introduced in 1924.
-2) After 1992, the Winter and Summer Games were held in different years. 
-Winter Games occurred every four years starting from 1994, and Summer Games occurred every four years beginning in 1996.
-3) We can also observe that no Olympics were organized between 1912 to 1920 and 1936 to 1948 because of World War I and World War II.
-4) During the Olympics at Los Angeles in 1932, the participation dipped because the Olympics were held during the great depression.
-5) During the 1976 Olympics at Montreal, there was a dip in attendance because 25 nations decided to boycott the Olympics in retaliation for apartheid policies in South Africa.
-6) During Olympics at Moscow in 1980, the number of Olympics who participated decreased because 66 nations decided to boycott the Olympics.
-7) Winter Olympics have much less participation than summer Olympics because ice and snow sports are not practical or popular in most nations due to climate conditions. This doesn't appear to change anytime soon.
-8) 2016 Summer Olympics was held in Rio, and it had maximum participation.
-
-Plot 2)
+**Key Observations:-**
 The above plot is a boxplot of participants' age from the Olympics in 1896 to 2016.
 
 1) the median age of male participants from 1896 to 2016 is between 23-26. And the median age remains almost constant.
@@ -224,17 +183,206 @@ The above plot is a boxplot of participants' age from the Olympics in 1896 to 20
 4) Female Olympians were allowed after 1920, so there is no data for 1896. The median age of female Olympians first increases, then it stabilizes.
 5) Also, the spread of female participants is less than that of the male participants.
 
-Plot 3)
 
-Initially, we considered the plots from 1896, but since female participants were very few till 1912 and then there was the first world war, so we have decided to consider athletes from 1924 as were have sufficient data from that year onwards.
+## Female Participation in Olympics 
 
-It is clearly evident from the above plot that Male athletes are taller and heavier than female athletes in general for all the Olympics from 1896 to 2016.
+```{r}
 
-In this plot, we have compared the average weight and average height for athletes in the 2016 Olympics in Gymnastics and Basketball.  Also, Athletes who play Basketball are taller and heavier than those who do Gymnastics. 
+data <- df %>% filter(Sport != "Art Competitions")
 
-17-year-old Brazilian gymnast Flavia Saraiva is the lightest athlete at only 31kg (68 lbs), and she was also the shortest. In general, Basketball players are very tall and heavy.
+original <- c(1994,1998,2002,2006,2010,2014)
+new <- c(1996,2000,2004,2008,2012,2016)
+for (i in 1:length(original)) {
+  data$Year <- gsub(original[i], new[i], data$Year)
+}
+data$Year <- as.integer(data$Year)
 
-Plot 4)
+counts_sex <- data %>% group_by(Year, Sex) %>%
+  summarize(Athletes = length(unique(identity)))
+counts_sex$Year <- as.integer(counts_sex$Year)
+
+
+p2 <- ggplot(counts_sex, aes(x=Year, y=Athletes, group=Sex, color=Sex)) +
+  geom_point(size=2) +
+  geom_line()  +
+  labs(title = "Number of male and female Olympians over time") +
+  theme(plot.title = element_text(hjust = 0.5))
+
+ggplotly(p2, tooltip = c("Year", "Athletes"))
+```
+
+**Plot:**
+
+The plot shows the total number of female and male athletes participating in winter and summer Olympics over the years. 
+
+**Observations:**
+
+As we can see from the above plot that the number of female athletes grew with similar pace as the number of male athletes over the years untill year 1996. After the year 1996, the male participation became stagnant with total count as ~8000, while the total count for female athletes was still increasing till the recent Olympic 2016.
+
+## Art Competitions in Olympics
+
+```{r}
+# count number of medals awarded to each Team
+art <- df %>% 
+  filter(Sport == "Art Competitions") %>%
+  select(Name, Sex, Age, Team, NOC, Year, City, Event, Medal)
+
+medal_counts_art <- art %>% filter(!is.na(Medal))%>%
+  group_by(Team, Medal) %>%
+  summarize(Count=length(Medal)) 
+
+# order Team by total medal count
+levs_art <- medal_counts_art %>%
+  group_by(Team) %>%
+  summarize(Total=sum(Count)) %>%
+  arrange(Total) %>%
+  select(Team)
+medal_counts_art$Team <- factor(medal_counts_art$Team, levels=levs_art$Team)
+
+# plot
+ggplot(medal_counts_art, aes(x=Team, y=Count, fill=Medal)) +
+  geom_col() +
+  coord_flip() +
+  scale_fill_manual(values=c("gold1","gray70","gold4")) +
+  ggtitle("Historical medal counts from Art Competitions") +
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+**Observations,**
+
+1) About 50 nations participated in the Art Competitions, and about one third won a medal. But over one third of all medals were awarded to artist from only 3 countries, Germany, France and Italy.
+2) Germany has won maximum number of medals from 1912 to 1948, but they were not invited in 3/7 Olympics as they were banned for 1920, 1924 and 1924. 
+3) Despite all the ban Germany won a lot of medals in 1936 Olympics that were held at Berlin.
+
+## Most popular sports in Olympics
+
+### Summer Olympics
+
+```{r}
+
+plot <- df %>% 
+  group_by(Year, Sport) %>% 
+  filter(Season=='Summer') %>% 
+  summarize(Count=n()) %>% 
+  group_by(Year) %>% 
+  top_n(5,Sport)
+
+ggplot(plot, aes(x=Year, y=Count, group=Sport)) +
+geom_col(aes(fill=Sport)) +
+scale_fill_hue(l=30)+
+scale_x_continuous(breaks=plot$Year)+
+theme(legend.position="top", legend.text=element_text(size=5),axis.text.x=element_text(size=8, angle=90,vjust=0,hjust=1))+
+labs(title="5 most popular sports in summer olympics", x="Years", y="Number of Olympians")
+
+```
+
+### Winter Olympics
+
+```{r}
+
+plot <- df %>% 
+  group_by(Year, Sport) %>% 
+  filter(Season=='Winter') %>% 
+  summarize(Count=n()) %>% 
+  group_by(Year) %>% 
+  top_n(5,Sport)
+
+ggplot(plot, aes(x=Year, y=Count, group=Sport)) +
+geom_col(aes(fill=Sport)) +
+scale_fill_hue(l=30)+
+scale_x_continuous(breaks=plot$Year)+
+theme(legend.position="top", legend.text=element_text(size=5),axis.text.x=element_text(size=8, angle=90,vjust=0,hjust=1))+
+labs(title="5 most popular sports in winter olympics", x="Years", y="Number of Olympians")
+
+```
+
+**Observations:**
+1) From 1948 to 1980 swimming was one of the the most popular sports in summer Olympics but after that it is not one of the 5 most popular sports.
+
+2) Wrestling is one of the most popular sports in summer Olympics. 
+
+3) After 1984 all the top 5 popular sports have remained the same and the number of participants are almost same.
+
+4) Ice hockey was popular till 1988 and after that it's popularity dropped also after 1998 snowboarding's popularity increased a lot and it has become one of the top 5 popular sport. 
+
+5) In winter Olympics speed skating has been the most popular sport for all the years.
+
+
+## Distribution of Height and Weight of Olympians
+
+```{r}
+f__ <- df[,c(3:6,10,13)]
+f__ <- f__[complete.cases(f__), ] 
+f__ %>% filter(Year >= 1924) %>% ggplot(aes(y = Height, x = Weight)) + geom_density_2d(aes(color = as.factor(Sex))) + facet_wrap(.~Year)
+```
+
+**Observations**
+Initially we considered the plots from 1896 but since female participants were very less till 1912 and then there was first world war so we have decided to consider athletes from 1924 as were have sufficient data from that year onwards.
+
+It is clearly evident from the above plot that Male athletes are taller and heavier than female athletes in all Olympics from 1896 to 2016.
+
+```{r}
+gym<-f__ %>% 
+  filter(Year == 2016) %>% 
+  filter(Sport == "Gymnastics") %>% 
+  ggplot(aes(x = Height, y = Weight)) + 
+  geom_density_2d(aes(color = as.factor(Sex))) + 
+  xlim(c(120, 220)) + ylim(30, 150) + 
+  theme(legend.position = "none")
+
+
+basket<-f__ %>% 
+  filter(Year == 2016) %>%
+  filter(Sport == "Basketball") %>%
+  ggplot(aes(x = Height, y = Weight)) +
+  geom_density_2d(aes(color = as.factor(Sex))) +
+  xlim(c(120, 220)) + ylim(30, 150)
+
+grid.arrange(gym, basket, nrow = 1,  widths = c(1.5, 1.75))
+
+```
+
+In this plot we have compared the average weight and average height for athletes in 2016 Olympics in Gymnastics and Basketball.  Also, Athletes who play Basketball are taller and heavier than who do Gymnastics. 
+
+17-year-old Brazilian gymnast Flavia Saraiva, is the lightest athletes at only 31kg (68 lbs) and she was also the shortest. Also, Basketball players are very tall and heavy. 
+
+
+## Distribution of Average Height and Weight of Olymipans accross sports
+
+```{r}
+options(ggrepel.max.overlaps = Inf)
+f__ <- f__ %>% 
+  group_by(Sport) %>% 
+  sample_n(25, replace =  TRUE)
+
+f__ <- f__ %>% 
+  mutate(Sex = ifelse(Sex == "M",1,0))
+```
+```{r ,fig.width= 7, fig.height= 7}
+features <- f__[,c(1:4)]
+
+clust <- kmeans(scale(features), 25)
+labels <- clust$cluster
+
+features <- features %>% 
+  mutate(labels = labels) %>% 
+  mutate(Year = f__$Year) %>% 
+  mutate(Sport = f__$Sport) %>% 
+  mutate(Age = f__$Age)
+
+sportMean <- features %>% 
+  group_by(Sport) %>% 
+  mutate(sportAvgHeight = mean(Height)) %>% 
+  mutate(sportAvgWeight = mean(Weight))
+
+sportMean <- distinct(sportMean,Sport, .keep_all = TRUE)
+sportMean %>% 
+  ggplot() + 
+  geom_label_repel(aes(label = Sport,x = sportAvgHeight, y = sportAvgWeight), size = 4)
+
+```
+
+**Observations**
 This plot is the distribution of different sports based on the average height and average weight for the athletes from 1896 to 2016. 
 We can see that athletes playing sports like Tug of War, Basketball, Baseball, and Bobsleigh are some of the tallest and heaviest athletes.
 On the other end, athletes who do Gymnastics, Synchronized Swimming, Diving, Rhythmic Gymnastics are very light and short.

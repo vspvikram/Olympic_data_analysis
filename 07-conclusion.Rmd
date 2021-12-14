@@ -1,2 +1,11 @@
 # Conclusion
 
+**Conclusion:**
+
+1) Modern Olympics were first organized in Athens with all-male participants from 12 countries. But after that we see a gradual increase in female participation. It is very low in the begining and then we see a big rise in 1980s.
+2) Winter Olympics were introduced in 1924  and they were held on same years as summer olympics till 1992. After 1992, the Winter and Summer Games were held in different years. Winter Games occurred every four years starting from 1994, and Summer Games occurred every four years beginning in 1996.
+3) The number of athletes, events, and nations has grown dramatically since 1896, but growth leveled off around 2000 for the Summer Games.
+4) The Art Competitions were included from 1912 to 1948, and were dominated by Germany, France, and Italy. Nazi Germany was especially dominant in the 1936 Games.
+5) Due to World War 1 and World War 2 some of the olympics were cancelled. We also have some missing games 1916 summer, 1940-1944 summer and winter Olympics. 
+6) The median age of male olympic medalist from 1896 to 2016 is between 25 and for female olympic medalist from 1896 to 2016 is 24.
+7) The Youngest Olympian of all time was Dimitrios Loundras of Greece, who at age 10 in 1896 won a bronze medal in gymnastics, which can be seen as an outlier in the year 1896 and the oldest Olympian medalist of all time was a Swedish shooter Oscar Swahn, who was 72 years, 280 days old when he won a silver medal in the 1920 Olympics. This shows the spread in the age of Olympic participants.

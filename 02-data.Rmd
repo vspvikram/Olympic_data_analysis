@@ -1,6 +1,27 @@
 # Data sources
 
-```{r}
+The dataset we are working on is the Olympic Games dataset that we scraped from http://www.olympedia.org/. It includes all the Games from Athens 1896 to Rio 2016. 
 
-```
+The file athlete_events.csv contains 271116 rows and 15 columns. Each row corresponds to an athlete competing in a particular Olympic event. The columns are:
+
+* Identity - Unique number for each athlete
+* Sex - M or F
+* Age - Integer
+* Name - Athlete's name
+* Team - Team name
+* NOC - National Olympic Committee (3-letter code)
+* Height - In centimeters
+* Weight - In kilograms
+* Sport - Sport
+* Event - Event
+* Year - Integer between 1896 to 2016
+* Season - Summer or Winter
+* Medal - Gold, Silver, Bronze, or NA
+* Games - Year and season
+* Year - Integer between 1896 to 2016
+* Season - Summer or Winter
+* City - Host city of the Olympics
+
+
+After 1992, the Winter and Summer Games were held in different years. Winter Games occurred every four years starting from 1994, and Summer Games occurred every four years beginning in 1996.
 

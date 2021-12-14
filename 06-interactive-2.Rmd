@@ -1,0 +1,19 @@
+# Interactive component 1: Female Participation
+
+**Plot:** Women athlete proportions for each country in a given is shown in the below plot. Along with the total number of female athletes compared to male athlete number, we have also compared the total number of medals won by females compared to male athletes. Countries that sent at least 50 athletes in Olympics were considered for this plot. 
+
+**Observations:**
+
+* As we can see that till 1920 less than 15 countries sent at least 50 athletes to Olympics. The female proportion was also less than 15%.
+* In 1936, we can see that the number of athletes sent by countries increased and the female proportion also increased. Highest female to male athletes number ratio of ~20% for two countries Canada and Great Britain.
+* From 1936 (just before world war 2) to 1948 (just after world war 2) the qualifying countries for this plot and the female proportions remained almost same. We can relate this stagnant phase in Olympics to slow growth of the countries when these countries were still trying to recover after the world war.
+* In 1976, East Germany was leading in female participation with around 40% female athletes in there teams. Following East Germany were Netherlands (35%) and hen Canada (33%). 
+* Before 2016, the total participation of females was less than 50% for all the countries, but in the year 2016 there were around 15 countries with female proportion of more than 50%. The number of qualifying countries (more than 49 athletes) were also increased significantly compared to year 1976. The proportion of medals won by females compared to males was more than 50% for around 3 countries in the year 1976 while in the year 2016 total 27 countries achieved this target. This signifies the increased involvement of women in Olympics games.
+
+<script src="https://d3js.org/d3.v7.js"></script>
+
+
+<select id="selectButton"></select>
+<div id="my_dataviz"></div>
+<script src="./d3/app.js" defer></script>
+

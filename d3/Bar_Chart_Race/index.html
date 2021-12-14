@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Bar Chart Race</title>
+<link rel="stylesheet" type="text/css" href="./inspector.css">
+<body>
+<h1>Olympics Summer Game Medals by Country through the years</h1>
+<script type="module">
+
+import define from "./index.js";
+import {Runtime, Library, Inspector} from "./runtime.js";
+
+const runtime = new Runtime();
+const main = runtime.module(define, Inspector.into(document.body));
+
+
+let svgs = document.getElementsByClassName('observablehq');
+for(let counter = 0; counter <= 30; counter++){
+    if((counter !== 4)){
+        svgs[counter].style.display = 'none'
+    }
+}
+</script>

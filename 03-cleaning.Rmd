@@ -1,1 +1,10 @@
 # Data transformation
+
+**Data Transformation:**
+
+- We had to remove a row with the team_name of "30. Febraur"
+- We used group_by to group the dataset by NOC (names of the country), Year (year of participation), and Medal (the kind of medal won).
+- This allowed us to look at the total number of medals won by each country. Using this we created an interactive plot to see the cumulative number of medals for each country across all the Olympic games
+- We also merged the dataset with another dataset that contained the country codes for all the countries, which allowed us to look at the country corresponding to the country code
+- In the process of data transformation, we also used aggregate functions like sum and count.
+- We also used the .to_csv() method to convert dataframes into csv files which could be used for creating interactive plots in d3.js.
