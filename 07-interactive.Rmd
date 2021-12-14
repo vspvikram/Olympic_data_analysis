@@ -1,0 +1,11 @@
+# Interactive component 2: Cumulative Medals for Each Country
+
+
+**Link to another Interactive Plot**: [Cumulative Medals for Each Country](https://vizhub.com/AniketShahane/e97f56f315684fbb8df67ce5f2ea5293?edit=files&file=index.html)
+
+**Observations from the Choropleth:**
+
+- This plot visualizes the cumulative medal count for all the countries throughout the Olympics' history
+- As we see that America is a clear leader when it comes to the total count of medals, across all types of medals, ie Gold , Silver, and Bronze.
+- There are a group of countries that have the most medals across different types  - America, England, Australia, Canada, Russia, France
+- The plot makes it easier to see the density of medals

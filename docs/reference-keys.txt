@@ -16,6 +16,6 @@ summer-olympics
 winter-olympics
 distribution-of-height-and-weight-of-olympians
 distribution-of-average-height-and-weight-of-olymipans-accross-sports
-interactive-component-2-cumulative-medals-for-each-country
 interactive-component-1-female-participation
+interactive-component-2-cumulative-medals-for-each-country
 conclusion
