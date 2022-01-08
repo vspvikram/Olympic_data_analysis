@@ -6,3 +6,6 @@ We explore these patterns and see how they were affected by the contemporary eve
 
 ## Data Source
 The dataset we are working on is the Olympic Games dataset that we scraped from http://www.olympedia.org/. It includes all the Games from Athens 1896 to Rio 2016. The file athlete_events.csv contains 271116 rows and 15 columns. Each row corresponds to an athlete competing in a particular Olympic event.
+
+### Link 
+https://vspvikram.github.io/Olympic_data_analysis/index.html
